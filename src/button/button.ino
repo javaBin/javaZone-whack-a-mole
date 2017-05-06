@@ -15,6 +15,8 @@ void setup() {
   
  int BlinkingLightID;
  int ButtonClickedID;
+
+ Serial.begin(9600);
 }
 
 void loop() {
@@ -29,6 +31,7 @@ void loop() {
 
   if (button2Value == 1 && button2PreviousValue == 0){
     button2Clicks +=1;
+    Serial.println( (String("Clicked ") + button2Clicks).c_str());
   }
   button2PreviousValue = button2Value;
   if( button2Clicks > 2){
