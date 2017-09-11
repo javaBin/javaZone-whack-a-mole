@@ -1,4 +1,7 @@
-from flask import Flask, url_for, request, current_app
+import json
+import urllib2
+from flask import Flask, url_for, request, render_template
+
 
 app = Flask(__name__, static_url_path='')
 
@@ -6,15 +9,29 @@ app = Flask(__name__, static_url_path='')
 def welcome():
     return app.send_static_file('index.html')
 
+@app.route('/gameon')
+def game_on():
+    return app.send_static_file('gameon.html')
+
+@app.route("/gameover")
+def get_data():
+	return str(json.load(urllib2.urlopen("http://harmannenfaltned.no/api")))
+
+@app.route('/showscore/')
+def hello(score=100000):
+    return render_template('showscore.html', score=score)
+
 
 @app.route("/api/startgame")
 def start_game():
-    return "Starting Game."
+	# TODO: serial call to arduino to start the game
+    return "Starting the game."
 
-@app.route("/api/getscore")
+@app.route("/api/endgame")
 def get_score():
+	# TODO: serial call to arduino to stop the game
+	# 
     return "Score = "  
-
 
 def has_no_empty_params(rule):
     defaults = rule.defaults if rule.defaults is not None else ()
