@@ -1,19 +1,19 @@
-from flask import Flask, url_for
+from flask import Flask, url_for, request, current_app
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 
-
-@app.route("/")
+@app.route('/')
 def welcome():
-    return "Go to /api"
+    return app.send_static_file('index.html')
+
 
 @app.route("/api/startgame")
 def start_game():
-    return "Starting Game"
+    return "Starting Game."
 
 @app.route("/api/getscore")
 def get_score():
-    return "Score"  
+    return "Score = "  
 
 
 def has_no_empty_params(rule):
