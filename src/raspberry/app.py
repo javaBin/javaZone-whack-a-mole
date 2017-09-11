@@ -16,9 +16,9 @@ def welcome():
 def game_on():
     return app.send_static_file('gameon.html')
 
-@app.route('/showscore/')
+@app.route('/showscore')
 def show_score(score=100000):
-	# TODO:  end game and get score from serial via API call – /api/endgame
+	# TODO:  end game and get score from serial via API call - /api/endgame
     return render_template('showscore.html', score=score)
 
 #############
